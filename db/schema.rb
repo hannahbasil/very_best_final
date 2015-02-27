@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227204755) do
+ActiveRecord::Schema.define(version: 20150227213234) do
+
+  create_table "cuisines", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dishes", force: :cascade do |t|
+    t.integer  "cuisine_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "dishes", ["cuisine_id"], name: "index_dishes_on_cuisine_id"
+
+  create_table "favorites", force: :cascade do |t|
+    t.text     "notes"
+    t.integer  "user_id"
+    t.integer  "dish_id"
+    t.integer  "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favorites", ["dish_id"], name: "index_favorites_on_dish_id"
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
+  add_index "favorites", ["venue_id"], name: "index_favorites_on_venue_id"
 
   create_table "neighborhoods", force: :cascade do |t|
     t.string   "name"
@@ -38,5 +66,15 @@ ActiveRecord::Schema.define(version: 20150227204755) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "venues", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.integer  "neighborhood_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "venues", ["neighborhood_id"], name: "index_venues_on_neighborhood_id"
 
 end
