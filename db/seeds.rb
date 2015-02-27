@@ -15,6 +15,8 @@ cuisine_hashes = [
 # Add the above info to the cuisines table.
 # Your code goes here.
 
+Cuisine.create cuisine_hashes
+
 puts "There are now #{Cuisine.count} cuisines in the database."
 
 dish_hashes = [
@@ -49,6 +51,16 @@ dish_hashes = [
 # Add the above info to the dishes table.
 # Your code goes here.
 
+dish_hashes.each do |dish_hash|
+  cuisine = Cuisine.find_by :name => dish_hash[:cuisine]
+
+  # dish = Dish.new
+  # dish.cuisine_id = cuisine.id
+  dish = cuisine.dishes.build
+  dish.name = dish_hash[:name]
+  dish.save
+end
+
 puts "There are now #{Dish.count} dishes in the database."
 
 neighborhood_hashes = [
@@ -66,6 +78,8 @@ neighborhood_hashes = [
 
 # Add the above info to the neighborhoods table.
 # Your code goes here.
+
+Neighborhood.create neighborhood_hashes
 
 puts "There are now #{Neighborhood.count} neighborhoods in the database."
 
@@ -102,15 +116,25 @@ venue_hashes = [
 # Add the above info to the venues table.
 # Your code goes here.
 
+venue_hashes.each do |venue_hash|
+  neighborhood = Neighborhood.find_by :name => venue_hash[:neighborhood]
+  venue = neighborhood.venues.build
+  # venue = Venue.new
+  # venue.neighborhood_id = neighborhood.id
+  venue.name = venue_hash[:name]
+  venue.address = venue_hash[:address]
+  venue.save
+end
+
 puts "There are now #{Venue.count} venues in the database."
 
 usernames = ["abby", "alex", "mike", "raghu"]
 
 usernames.each do |username|
   user = User.create({
-    :username => username
-    :email => "#{username}@example.com"
-    :password => "12341234"
+    :username => username,
+    :email => "#{username}@example.com",
+    :password => "12341234",
     :password_confirmation => "12341234"
   })
 end
