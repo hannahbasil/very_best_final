@@ -1,5 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700);
-@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Lato:300);
+@import url(http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic);
 
 @import "_variables.scss";
 
@@ -10,3 +10,12 @@
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+h1, h2, h3  {
+  text-transform: uppercase;
+}
+
+.navbar a {
+  font-family: $font-family-sans-serif;
+  text-transform: uppercase;
+}
