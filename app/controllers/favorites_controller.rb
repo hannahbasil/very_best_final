@@ -25,6 +25,7 @@ class FavoritesController < ApplicationController
   # POST /favorites.json
   def create
     @favorite = Favorite.new(favorite_params)
+    @favorite.user = current_user
 
     respond_to do |format|
       if @favorite.save
@@ -69,6 +70,6 @@ class FavoritesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def favorite_params
-      params.require(:favorite).permit(:notes, :user_id, :dish_id, :venue_id)
+      params.require(:favorite).permit(:notes, :dish_id, :venue_id)
     end
 end
