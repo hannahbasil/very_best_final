@@ -1,5 +1,13 @@
 class FavoritesController < ApplicationController
-  before_action :set_favorite, only: [:show, :edit, :update, :destroy]
+  before_action :set_favorite, :only => [:show, :edit, :update, :destroy]
+
+  before_action :authorize_user, :only => [:edit, :update, :destroy, :show]
+
+  def authorize_user
+    if current_user != @favorite.user
+      redirect_to :back, :notice => "Not authorized for that."
+    end
+  end
 
   # GET /favorites
   # GET /favorites.json

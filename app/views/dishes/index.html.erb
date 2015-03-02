@@ -22,7 +22,9 @@
       <div class="panel-heading">
         <h3 class="panel-title">
           <%= dish.name %>
-          <small><%= dish.cuisine.name %></small>
+          <%# if dish.cuisine.present? %>
+          <small><%= dish.cuisine.try(:name) %></small>
+          <%# end %>
         </h3>
       </div>
       <div class="panel-body">

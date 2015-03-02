@@ -1,6 +1,14 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: [:show, :edit, :update, :destroy]
 
+  before_action :bounce_ordinary_users, :only => [:edit, :update, :destroy]
+
+  def bounce_ordinary_users
+    if current_user.email != "raghu@starterleague.com"
+      redirect_to :back, :notice => "You aren't authorized for that."
+    end
+  end
+
   # GET /venues
   # GET /venues.json
   def index
