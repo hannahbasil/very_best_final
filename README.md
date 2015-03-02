@@ -64,3 +64,41 @@ We are going to use this project to practice a few setup techniques that you wil
 ### Add dropdowns for foreign keys in forms
 
 ### Use current_user to fill in user_id foreign keys
+
+## Customizing the UX
+
+Now that we've done all the common, boilerplate setup stuff, it's time to customize the user experience to match our vision. The out-of-the-box scaffold code is just a starting point.
+
+### Show existing favorites on dishes#index
+
+The most important page in this app is the list of dishes. I should be able to perform most important operations from here.
+
+So, for any dish that I've already found a favorite of, let's show the venue that I liked.
+
+You'll have to, while you are drawing each dish's panel, check if a favorite exists for the current user for that dish. If so, write the venue name.
+
+### Change the buttons
+
+We don't really want users to destroy or edit dishes, which is what the scaffolded buttons on the dishes#index page do. Instead, let's change the buttons to destroy or edit existing favorites. Remove the show button entirely.
+
+### Put forms for new favorites on dishes#index
+
+In case I haven't already set a favorite for a dish, I should see a form to create one right there inside the panel. The user should only see a dropdown for `venue_id`; you should be able to set `dish_id` and `user_id` in other ways.
+
+### Show best dishes on venues#show
+
+If I visit the show page for a venue, I would like to see what dishes other people have marked as their favorites there.
+
+## Adding security
+
+Now that we have the application functional, and the basic UX flow is implemented, it's time to think about security.
+
+## Add before_actions to prevent users from modifying or deleting dishes, venues, or neighborhoods.
+
+### Add before_actions to prevent users from modifying or deleting other users' favorites.
+
+### Remove links that users shouldn't see
+
+Now that we've secured the app with `before_action`s, let's also remove links so that we don't frustrate users by allowing them to attempt actions they aren't authorized for.
+
+
