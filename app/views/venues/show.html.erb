@@ -30,6 +30,13 @@
           </div>
         </div>
       </div>
+
+      <ul class="list-group">
+      <% @venue.dishes.uniq.each do |dish| %>
+        <li class="list-group-item"><%= dish.name %></li>
+      <% end %>
+      </ul>
+
     </div>
   </div>
 </div>
