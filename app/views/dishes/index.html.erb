@@ -33,13 +33,19 @@
 
         <% if existing_favorite.present? %>
           <p class="lead"><%= existing_favorite.venue.name %></p>
+
+          <div class="btn-group btn-group-justified">
+            <%= link_to icon('edit'), edit_favorite_url(existing_favorite), class: "btn btn-warning" %>
+
+            <%= link_to icon('trash-o'), existing_favorite, method: :delete, data: { confirm: "Do you really want to delete this favorite?" }, class: "btn btn-danger" %>
+          </div>
         <% else %>
           <% new_fave = Favorite.new %>
           <% new_fave.dish_id = dish.id %>
           <%= form_for new_fave do |f| %>
             <%= f.collection_select :venue_id, Venue.all, :id, :name, {}, :class => "form-control" %>
             <%= f.hidden_field :dish_id %>
-            <%= f.submit :class => "btn btn-success btn-block" %>
+            <%= f.button icon('plus'), :class => "btn btn-success btn-block" %>
           <% end %>
 
           <%#= form_tag favorites_url do %>
@@ -49,14 +55,6 @@
           <%# end %>
 
         <% end %>
-
-        <div class="btn-group btn-group-justified">
-          <%= link_to icon('search-plus'), dish, class: "btn btn-primary" %>
-
-          <%= link_to icon('edit'), edit_dish_url(dish), class: "btn btn-warning" %>
-
-          <%= link_to icon('trash-o'), dish, method: :delete, data: { confirm: "Do you really want to delete this dish?" }, class: "btn btn-danger" %>
-        </div>
       </div>
     </div>
   </div>
