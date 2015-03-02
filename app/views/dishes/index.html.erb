@@ -27,16 +27,27 @@
       </div>
       <div class="panel-body">
 
-        <% existing_favorite = Favorite.find_by({ :dish_id => dish.id, :user_id => current_user.id }) %>
+        <%# existing_favorite = Favorite.find_by({ :dish_id => dish.id, :user_id => current_user.id }) %>
+
         <% existing_favorite = current_user.favorites.find_by(:dish_id => dish.id) %>
+
         <% if existing_favorite.present? %>
           <p class="lead"><%= existing_favorite.venue.name %></p>
         <% else %>
-          <%= form_for Favorite.new(:dish_id => dish.id) do |f| %>
-            <%= f.collection_select :venue_id, Venue.all, :id, :name %>
+          <% new_fave = Favorite.new %>
+          <% new_fave.dish_id = dish.id %>
+          <%= form_for new_fave do |f| %>
+            <%= f.collection_select :venue_id, Venue.all, :id, :name, {}, :class => "form-control" %>
             <%= f.hidden_field :dish_id %>
-            <%= f.submit %>
+            <%= f.submit :class => "btn btn-success btn-block" %>
           <% end %>
+
+          <%#= form_tag favorites_url do %>
+            <%#= select_tag :venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control" %>
+            <%#= hidden_field_tag :dish_id, dish.id %>
+            <%#= submit_tag "Add", :class => "btn btn-success btn-block" %>
+          <%# end %>
+
         <% end %>
 
         <div class="btn-group btn-group-justified">
