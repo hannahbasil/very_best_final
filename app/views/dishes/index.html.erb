@@ -26,9 +26,10 @@
         </h3>
       </div>
       <div class="panel-body">
-        <% f = Favorite.find_by({ :dish_id => dish.id, :user_id => current_user.id }) %>
-        <% f = current_user.favorites.find_by(:dish_id => dish.id) %>
-        <% if f.present? %>
+
+        <% existing_favorite = Favorite.find_by({ :dish_id => dish.id, :user_id => current_user.id }) %>
+        <% existing_favorite = current_user.favorites.find_by(:dish_id => dish.id) %>
+        <% if existing_favorite.present? %>
           <p class="lead"><%= f.venue.name %></p>
         <% else %>
           <%= form_for Favorite.new(:dish_id => dish.id) do |f| %>
@@ -37,6 +38,7 @@
             <%= f.submit %>
           <% end %>
         <% end %>
+
         <div class="btn-group btn-group-justified">
           <%= link_to icon('search-plus'), dish, class: "btn btn-primary" %>
 
