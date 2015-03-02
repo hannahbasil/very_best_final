@@ -45,7 +45,7 @@
           <% new_fave = Favorite.new %>
           <% new_fave.dish_id = dish.id %>
           <%= form_for new_fave do |f| %>
-            <%= f.collection_select :venue_id, Venue.all, :id, :name, {}, :class => "form-control" %>
+            <%= f.collection_select :venue_id, Venue.all, :id, :name, { :prompt => "Select a venue..." }, :class => "form-control" %>
             <%= f.hidden_field :dish_id %>
             <%= f.button icon('plus'), :class => "btn btn-success btn-block" %>
           <% end %>

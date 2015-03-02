@@ -4,4 +4,7 @@ class Venue < ActiveRecord::Base
   has_many :dishes, :through => :favorites
 
   validates :name, :presence => true, :uniqueness => { :scope => :address }
+
+  default_scope { order("name ASC") }
+
 end

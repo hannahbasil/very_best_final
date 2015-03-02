@@ -12,7 +12,7 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.all
+    @venues = Venue.page(params[:page]).per(5)
   end
 
   # GET /venues/1
